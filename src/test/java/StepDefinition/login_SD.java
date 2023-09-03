@@ -1,13 +1,9 @@
 package StepDefinition;
 
-import java.net.SocketException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import com.orangehrm.LoginPage;
-
 import Utility.Seleniumutility;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,7 +14,7 @@ public class login_SD extends Seleniumutility {
 	LoginPage orgLogin;
 
 	@Given("User opens the {string} browser and OrangeHRM application using {string}")
-	public void user_opens_the_browser_and_OrangeHRM_application_using(String browser, String url) throws SocketException {
+	public void user_opens_the_browser_and_OrangeHRM_application_using(String browser, String url) {
 		driver = setUp(browser, url);
 		orgLogin = PageFactory.initElements(driver,  LoginPage.class);
 	}
