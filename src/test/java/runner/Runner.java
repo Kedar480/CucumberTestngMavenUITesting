@@ -12,7 +12,6 @@ import io.cucumber.testng.CucumberOptions;
 		
 		plugin = {"pretty"}
 				
-//		publish = true// to generate the report post to the execution 
 	)
 
 public class Runner extends AbstractTestNGCucumberTests {
