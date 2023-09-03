@@ -20,5 +20,4 @@ Feature: Login to OrangeHRM
     | "Space"    | "false" |
     | "racecar"  | "true"  |
     
-    
-    dvad
+  
