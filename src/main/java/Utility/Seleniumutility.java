@@ -25,7 +25,7 @@ public class Seleniumutility {
 	public static Actions actions;
 	public static WebDriverWait wait;
 
-	public static WebDriver setUp(String browser, String url) {
+	public static WebDriver setUp(String browser, String url)  {
 		try {
 			if (browser.equalsIgnoreCase("Chrome")) {
 				ChromeOptions chromeOptions = new ChromeOptions();

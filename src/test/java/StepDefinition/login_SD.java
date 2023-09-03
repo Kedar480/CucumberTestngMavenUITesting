@@ -18,7 +18,7 @@ public class login_SD extends Seleniumutility {
 	LoginPage orgLogin;
 
 	@Given("User opens the {string} browser and OrangeHRM application using {string}")
-	public void user_opens_the_browser_and_OrangeHRM_application_using(String browser, String url) {
+	public void user_opens_the_browser_and_OrangeHRM_application_using(String browser, String url) throws SocketException {
 		driver = setUp(browser, url);
 		orgLogin = PageFactory.initElements(driver,  LoginPage.class);
 	}
