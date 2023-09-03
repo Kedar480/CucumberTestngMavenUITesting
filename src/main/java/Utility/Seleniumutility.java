@@ -25,27 +25,23 @@ public class Seleniumutility {
 	public static Actions actions;
 	public static WebDriverWait wait;
 
-	public static WebDriver setUp(String browser, String url)  {
-		try {
-			if (browser.equalsIgnoreCase("Chrome")) {
-				ChromeOptions chromeOptions = new ChromeOptions();
-				chromeOptions.addArguments("--remote-allow-origins=*");
-				System.setProperty("webdriver.chrome.driver",
-						"C:\\Users\\Kedar\\Downloads\\New folder (4)\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
-				driver = new ChromeDriver(chromeOptions);
-			} else if (browser.equalsIgnoreCase("Edge")) {
-				WebDriverManager.edgedriver().setup();
-				driver = new EdgeDriver();
-			} else if (browser.equalsIgnoreCase("Firefox")) {
-				WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();
-			}
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-			driver.get(url);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public static WebDriver setUp(String browser, String url) {
+		if (browser.equalsIgnoreCase("Chrome")) {
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--remote-allow-origins=*");
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\Kedar\\Downloads\\New folder (4)\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
+			driver = new ChromeDriver(chromeOptions);
+		} else if (browser.equalsIgnoreCase("Edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+		} else if (browser.equalsIgnoreCase("Firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
 		}
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.get(url);
 		return driver;
 	}
 
