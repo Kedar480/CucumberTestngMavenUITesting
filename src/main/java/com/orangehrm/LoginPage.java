@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import Utility.Seleniumutility;
 
-public class Orangehrmpage extends Seleniumutility  {
+public class LoginPage extends Seleniumutility  {
 
 	@FindBy(name="username")
 	private WebElement userNameField;

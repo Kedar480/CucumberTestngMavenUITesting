@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,10 +12,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Seleniumutility {
@@ -25,27 +25,30 @@ public class Seleniumutility {
 	public static Actions actions;
 	public static WebDriverWait wait;
 
-
-	public static WebDriver setUp(String browser,String url) {
-
-		if(browser.equalsIgnoreCase("Chrome")) {
-			ChromeOptions chromeOptions = new ChromeOptions();
-			chromeOptions.addArguments("--remote-allow-origins=*");
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Kedar\\Downloads\\New folder (4)\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
-			driver = new ChromeDriver(chromeOptions);
-
-		}else if(browser.equalsIgnoreCase("Edge")) {
-			WebDriverManager.edgedriver().setup();
-			driver = new ChromeDriver();
-		}else if(browser.equalsIgnoreCase("Firefox")) { 
-			WebDriverManager.firefoxdriver().setup();
-			driver = new ChromeDriver();
+	public static WebDriver setUp(String browser, String url) {
+		try {
+			if (browser.equalsIgnoreCase("Chrome")) {
+				ChromeOptions chromeOptions = new ChromeOptions();
+				chromeOptions.addArguments("--remote-allow-origins=*");
+				System.setProperty("webdriver.chrome.driver",
+						"C:\\Users\\Kedar\\Downloads\\New folder (4)\\chromedriver-win32\\chromedriver-win32\\chromedriver.exe");
+				driver = new ChromeDriver(chromeOptions);
+			} else if (browser.equalsIgnoreCase("Edge")) {
+				WebDriverManager.edgedriver().setup();
+				driver = new EdgeDriver();
+			} else if (browser.equalsIgnoreCase("Firefox")) {
+				WebDriverManager.firefoxdriver().setup();
+				driver = new FirefoxDriver();
+			}
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+			driver.get(url);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		driver.get(url);
 		return driver;
 	}
+
 	public void mouseHover(String hoverOpe, WebElement element, Integer x, Integer y) {
 		actions = new Actions(driver);
 		if (hoverOpe.equalsIgnoreCase("targetElement"))
@@ -71,7 +74,7 @@ public class Seleniumutility {
 		actions = new Actions(driver);
 		if (releaseOpe.equalsIgnoreCase("sourceAndTarget")) {
 			actions.clickAndHold(sourceElement).build().perform();
-			//				actions.moveToElement(targetElement).perform();
+			// actions.moveToElement(targetElement).perform();
 			actions.release(targetElement).build().perform();
 		}
 		if (releaseOpe.equalsIgnoreCase("sourceAndOffset")) {
@@ -133,7 +136,7 @@ public class Seleniumutility {
 	}
 
 	public String getCurrentPageUrl(String expectedUrl) {
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.urlToBe(expectedUrl));
 		return driver.getCurrentUrl();
 	}
@@ -143,7 +146,3 @@ public class Seleniumutility {
 	}
 
 }
-
-
-
-
